@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Novo produto</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="POST">
+            <form method="POST" id="createForm">
                 <div class="modal-body">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="nome" id="nome"
@@ -26,7 +26,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
-                        <button type="button" class="btn btn-success">Salvar</button>
+                        <button type="button" class="btn btn-success" id="btnCreateProject">Cadastrar</button>
                     </div>
                 </form>
         </div>
