@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 namespace App\Services;
 
 use App\Repositories\ProductRepository;
 
-class ProductService 
+class ProductService
 {
     private $repository;
 
@@ -12,8 +12,13 @@ class ProductService
         $this->repository = $productRepository;
     }
 
-    public function all() 
-    { 
+    public function all()
+    {
         return $this->repository->all();
+    }
+
+    public function create($dados)
+    {
+        dd($dados->all());
     }
 }
