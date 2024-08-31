@@ -1,6 +1,7 @@
 
 $('#createForm').on('submit', function (event) {
     event.preventDefault();
+    // limparCamposDeErros();
 
     $.ajax({
         type: $(this).attr('method'),
@@ -18,7 +19,7 @@ $('#createForm').on('submit', function (event) {
 
 
 function exibeErros(erros) {
-    console.log();
+    console.log(erros);
     Object.entries(erros).forEach(([key, value]) => {
         let campo = key;
         switch (campo) {
@@ -54,8 +55,13 @@ function exibeErrosPreco(value) {
 }
 
 function limparCamposDeErros() {
-    $('#nomeErros').html();
-    $('#codigoErros').html();
-    $('#descricaoErros').html();
-    $('#precoErros').html();
+    $('#nomeErros').empty();
+    $('#codigoErros').empty();
+    $('#descricaoErros').empty();
+    $('#precoErros').empty();
 }
+
+
+$(document).ready(function () {
+    $('#preco').mask('R$ #.###.##', { reverse: true });
+});

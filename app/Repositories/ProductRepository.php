@@ -20,7 +20,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function create($data) 
     {
-        return $this->product->create($data);
+        return $this->product->create($data->all());
 
     }
 

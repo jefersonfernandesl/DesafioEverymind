@@ -24,6 +24,7 @@ class ProductController extends Controller
     {
         try {
             $this->service->create($request);
+            return redirec()->route('product.index');
         } catch (\Exception $e) {
             dd($e->getMessage());
         }

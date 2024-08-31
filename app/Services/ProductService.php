@@ -19,6 +19,16 @@ class ProductService
 
     public function create($dados)
     {
-        dd($dados->all());
+        $this->repository->create($dados);
+    }
+
+    public function update($dados)
+    {
+        $this->repository->edit($dados);
+    }
+
+    public function find($id) 
+    {
+        return $this->repositor->find($id);
     }
 }
