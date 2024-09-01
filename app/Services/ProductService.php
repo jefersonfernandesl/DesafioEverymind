@@ -22,9 +22,9 @@ class ProductService
         return $this->repository->create($dados);
     }
 
-    public function update($dados)
+    public function update($id, $dados)
     {
-        $this->repository->edit($dados);
+        return $this->repository->update($id, $dados);
     }
 
     public function find($id) 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductEditFormRequest;
 use App\Http\Requests\ProductFormRequest;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -19,14 +21,16 @@ class ProductController extends Controller
         return view('index');
     }
 
-    public function atualizarProdutos() {
+    public function atualizarProdutos()
+    {
         $products = $this->service->all();
         return response()->json($products, 200);
     }
 
-    public function encontrarProduto($id) {
+    public function encontrarProduto($id)
+    {
         $product = $this->service->find($id);
-        if(!isset($product)) {
+        if (!isset($product)) {
             return response()->json('O produto não foi encontrado!', 500);
         }
         return response()->json($product, 201);
@@ -36,7 +40,7 @@ class ProductController extends Controller
     {
         try {
             $products = $this->service->create($request);
-            if(!isset($products)) {
+            if (!isset($products)) {
                 return response()->json('Erro ao cadastrar o produto!', 500);
             }
             return response()->json('Produto cadastrado com sucesso!', 201);
@@ -48,11 +52,11 @@ class ProductController extends Controller
     public function update(ProductFormRequest $request)
     {
         try {
-            $products = $this->service->create($request);
-            if(!isset($products)) {
-                return response()->json('Erro ao cadastrar o produto!', 500);
+            $products = $this->service->update($request->id, $request);
+            if (!isset($products)) {
+                return response()->json('Erro ao atualizar o produto!', 500);
             }
-            return response()->json('Produto cadastrado com sucesso!', 201);
+            return response()->json('Produto atualizado com sucesso!', 201);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }

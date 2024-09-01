@@ -26,7 +26,13 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function update($id, $data) 
     {
-
+        $product = $this->find($id);
+        return $product->update([
+            'nome' => $data->nome,
+            'codigo' => $data->codigo,
+            'descricao' => $data->descricao,
+            'preco' => $data->preco
+        ]);
     }
 
     public function delete($id) 

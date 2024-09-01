@@ -1,13 +1,13 @@
 $(document).ready(function () {
     atualizarProdutos();
 
+    $('#preco').mask('000.000.000,00', { reverse: true });
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-    $('#preco').mask('000.000.000,00', { reverse: true });
 });
 
 function atualizarProdutos() {
@@ -59,9 +59,7 @@ function editarModal(id) {
                             </div>
                             <div class="modal-body">
                                 <form id="editForm" data-id="${response.id}" method="POST">
-                                
-                                    <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr('content')}">
-                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="_method" value="PUT" id="_method">
 
                                     <div class="mb-3">
                                         <label for="nomeEdit" class="form-label">Nome</label>
@@ -102,12 +100,25 @@ function editarModal(id) {
                 let preco = $('#precoEdit').val();
                 preco = preco.replace(/[R$.]/g, '').replace(',', '.');
                 $('#precoEdit').val(preco);
-
+                
+                let _method = $('#_method').val()
+                let id = $('#editForm').data('id');
+                let nome = $('#nomeEdit').val();
+                let codigo = $('#codigoEdit').val();
+                let descricao = $('#descricaoEdit').val();
+                            
                 $.ajax({
                     type: 'POST',
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content') },
                     url: `/atualizar/${produtoId}`,
-                    data: $(this).serialize(),
+                    data: {
+                        _method,
+                        id,
+                        nome,
+                        codigo,
+                        descricao,
+                        preco
+                    },
                     dataType: "json",
                     success: function (response) {
                         atualizarProdutos();
@@ -117,7 +128,7 @@ function editarModal(id) {
                     error: function (response) {
                         if (response.status == 422) {
                             let erros = response.responseJSON.errors;
-                            exibeErros(erros);
+                            exibeErrosEdit(erros);
                         } else {
                             console.log(response.responseJSON);
                         }
@@ -171,46 +182,46 @@ function deletarProduto(id) {
     });
 }
 
-function exibeErros(erros) {
+function exibeErrosEdit(erros) {
     Object.entries(erros).forEach(([key, value]) => {
         let campo = key;
         switch (campo) {
             case "nome":
-                exibeErrosNome(value);
+                exibeErrosNomeEdit(value);
                 break;
             case "codigo":
-                exibeErrosCodigo(value);
+                exibeErrosCodigoEdit(value);
                 break;
             case "descricao":
-                exibeErrosDescricao(value);
+                exibeErrosDescricaoEdit(value);
                 break;
             case "preco":
-                exibeErrosPreco(value);
+                exibeErrosPrecoEdit(value);
         };
     });
 }
 
-function exibeErrosNome(value) {
+function exibeErrosNomeEdit(value) {
     $('#nomeEditErros').html('');
     $('#nomeEditErros').append(`<span class="invalid">${value}</span>`);
 }
 
-function exibeErrosCodigo(value) {
+function exibeErrosCodigoEdit(value) {
     $('#codigoEditErros').html('');
     $('#codigoEditErros').append(`<span class="invalid">${value}</span>`);
 }
 
-function exibeErrosDescricao(value) {
+function exibeErrosDescricaoEdit(value) {
     $('#descricaoEditErros').html('');
     $('#descricaoEditErros').append(`<span class="invalid">${value}</span>`);
 }
 
-function exibeErrosPreco(value) {
+function exibeErrosPrecoEdit(value) {
     $('#precoEditErros').html('');
     $('#precoEditErros').append(`<span class="invalid">${value}</span>`);
 }
 
-function limparCamposDeErros() {
+function limparCamposDeErrosEdit() {
     $('#nomeEditErros').empty();
     $('#codigoEditErros').empty();
     $('#descricaoEditErros').empty();
