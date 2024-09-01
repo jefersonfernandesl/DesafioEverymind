@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center aling-itens-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
-                    <button type="submit" class="btn btn-success" id="btnCreateProject">Cdastrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="voltarBtnCreateModal">Voltar</button>
+                    <button type="submit" class="btn btn-success" id="btnCreateProject">Cadastrar</button>
                 </div>
             </form>
         </div>

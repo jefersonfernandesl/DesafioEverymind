@@ -1,7 +1,9 @@
-
 $('#createForm').on('submit', function (event) {
     event.preventDefault();
-    // limparCamposDeErros();
+
+    let preco = $('#preco').val();
+    preco = preco.replace(/[R$.]/g, '').replace(',', '.');
+    $('#preco').val(preco);
 
     $.ajax({
         type: $(this).attr('method'),
@@ -9,17 +11,23 @@ $('#createForm').on('submit', function (event) {
         data: $(this).serialize(),
         dataType: "json",
         success: function (response) {
-            console.log('po');
+            atualizarProdutos();
+            $('#staticBackdrop').modal('hide');
         },
         error: function (response) {
-            exibeErros(response.responseJSON.errors)
+            if (response.status == 422) {
+                let erros = response.responseJSON.errors;
+                exibeErros(erros);
+            }
+            else {
+                console.log(response.responseJSON);
+            }
         }
     });
 });
 
 
 function exibeErros(erros) {
-    console.log(erros);
     Object.entries(erros).forEach(([key, value]) => {
         let campo = key;
         switch (campo) {
@@ -63,5 +71,5 @@ function limparCamposDeErros() {
 
 
 $(document).ready(function () {
-    $('#preco').mask('R$ #.###.##', { reverse: true });
+    $('#preco').mask('000.000.000,00', { reverse: true });
 });

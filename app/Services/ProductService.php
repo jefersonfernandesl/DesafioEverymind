@@ -19,7 +19,7 @@ class ProductService
 
     public function create($dados)
     {
-        $this->repository->create($dados);
+        return $this->repository->create($dados);
     }
 
     public function update($dados)
@@ -29,6 +29,6 @@ class ProductService
 
     public function find($id) 
     {
-        return $this->repositor->find($id);
+        return $this->repository->find($id);
     }
 }

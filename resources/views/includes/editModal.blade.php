@@ -12,28 +12,28 @@
                 <div class="modal-body">
                     <div class="mb-3" id="nomeContainer">
                         <div class="input-group mb-1 d-flex">
-                            <input type="text" class="form-control" name="nome" id="nomeEdit" value="{{$product->nome }}"
+                            <input type="text" class="form-control" name="nome" id="nomeEdit" value=""
                                 placeholder="Nome do produto">
                         </div>
                         <div id="nomeEditErros"></div>
                     </div>
                     <div class="mb-3" id="codigoCotainer">
                         <div class="input-group mb-1">
-                            <input type="text" class="form-control" name="codigo" id="codigoEdit" value="{{ $product->codigo }}"
+                            <input type="text" class="form-control" name="codigo" id="codigoEdit" value=""
                                 placeholder="Código do produto">
                         </div>
                         <div id="codigoEditErros"></div>
                     </div>
                     <div class="mb-3" id="descricaoContainer">
                         <div class="input-group mb-1">
-                            <input type="text" class="form-control" name="descricao" id="descricaoEdit" value="{{ $product->descricao }}"
+                            <input type="text" class="form-control" name="descricao" id="descricaoEdit" value=""
                                 placeholder="Descrição do produto">
                         </div>
                         <div id="descricaoEditErros"></div>
                     </div>
                     <div class="mb-3" id="precoContainer">
                         <div class="input-group mb-1">
-                            <input type="text" class="form-control" name="preco" id="precoEdit" value="{{ $product->preco }}"
+                            <input type="text" class="form-control" name="preco" id="precoEdit" value=""
                                 placeholder="Preço do produto">
                         </div>
                         <div id="precoEditErros"></div>
