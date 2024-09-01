@@ -44,4 +44,17 @@ class ProductController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function update(ProductFormRequest $request)
+    {
+        try {
+            $products = $this->service->create($request);
+            if(!isset($products)) {
+                return response()->json('Erro ao cadastrar o produto!', 500);
+            }
+            return response()->json('Produto cadastrado com sucesso!', 201);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
 }
