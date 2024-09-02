@@ -4,8 +4,6 @@ services:
   app:
     build:
       context: .
-    volumes:
-      - .:/var/www
     ports:
       - "8080:8080"
     depends_on:
