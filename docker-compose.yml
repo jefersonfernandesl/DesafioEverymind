@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/var/www
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    entrypoint: [
+      "/bin/sh", "-c",
+      "if [ ! -f \"/var/www/.env\" ]; then cp /var/www/.env.example /var/www/.env; fi && \
+      php artisan key:generate && \
+      php artisan migrate --force && \
+      php artisan serve --host=0.0.0.0 --port=8080"
+    ]
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: everymind_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8081:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
