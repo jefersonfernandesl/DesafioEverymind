@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductEditFormRequest;
 use App\Http\Requests\ProductFormRequest;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -19,21 +17,6 @@ class ProductController extends Controller
     public function index()
     {
         return view('index');
-    }
-
-    public function atualizarProdutos()
-    {
-        $products = $this->service->all();
-        return response()->json($products, 200);
-    }
-
-    public function encontrarProduto($id)
-    {
-        $product = $this->service->find($id);
-        if (!isset($product)) {
-            return response()->json('O produto não foi encontrado!', 500);
-        }
-        return response()->json($product, 201);
     }
 
     public function create(ProductFormRequest $request)
@@ -66,5 +49,20 @@ class ProductController extends Controller
     {
         $product = $this->service->delete($id);
         return response()->json('Produto excluído com sucesso!');
+    }
+
+    public function atualizarProdutos()
+    {
+        $products = $this->service->all();
+        return response()->json($products, 200);
+    }
+
+    public function encontrarProduto($id)
+    {
+        $product = $this->service->find($id);
+        if (!isset($product)) {
+            return response()->json('O produto não foi encontrado!', 500);
+        }
+        return response()->json($product, 201);
     }
 }

@@ -16,7 +16,6 @@ function atualizarProdutos() {
         type: 'GET',
         dataType: 'json',
         success: function (response) {
-            console.log(response);
             let productsHtml = '';
 
             response.forEach(product => {
@@ -114,9 +113,9 @@ function editarModal(id) {
                 let descricao = $('#descricaoEdit').val();
 
                 $.ajax({
-                    type: 'POST',
+                    type: 'PUT',
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content') },
-                    url: `/atualizar/${produtoId}`,
+                    url: `/${produtoId}`,
                     data: {
                         _method,
                         id,
@@ -183,7 +182,7 @@ function deletarModal(id) {
 function deletarProduto(id) {
     $.ajax({
         type: 'DELETE',
-        url: `/apagar/${id}`,
+        url: `/${id}`,
         success: function (response) {
             iziToast.success({
                 title: 'Sucesso!',
