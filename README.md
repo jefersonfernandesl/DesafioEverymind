@@ -24,7 +24,7 @@ git clone https://github.com/jefersonfernandesl/DesafioEverymind.git
 cd DesafioEverymind
 
 # Comando para iniciar o Docker
-docker-compose up --build
+docker-compose up --build (OBS: PODE OCORRER UM ERRO AO SUBIR O BANCO DE DADOS POSTGRES, BASTA ENCERRAR O COMANDO E RODAR ELE NOVAMENTE);
 
 # Basta acessar no seu navegador
 localhost:8080
