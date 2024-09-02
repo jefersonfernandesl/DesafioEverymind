@@ -16,6 +16,7 @@ function atualizarProdutos() {
         type: 'GET',
         dataType: 'json',
         success: function (response) {
+            console.log(response);
             let productsHtml = '';
 
             response.forEach(product => {
@@ -36,10 +37,12 @@ function atualizarProdutos() {
             $('#tbody').html(productsHtml);
         },
         error: function (xhr, status, error) {
-            iziToast.error({
-                title: 'Falha!',
-                message: 'Não foi possível buscar os produtos',
-            });
+            if (error != "Not Found") {
+                iziToast.error({
+                    title: 'Falha!',
+                    message: 'Não foi possível buscar os produtos',
+                });
+            }
         }
     });
 }
