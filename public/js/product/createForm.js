@@ -11,6 +11,11 @@ $('#createForm').on('submit', function (event) {
         data: $(this).serialize(),
         dataType: "json",
         success: function (response) {
+            $('#createForm').trigger('reset');
+            iziToast.success({
+                title: 'Sucesso!',
+                message: 'Produto cadastrado.',
+            });
             atualizarProdutos();
             $('#staticBackdrop').modal('hide');
         },

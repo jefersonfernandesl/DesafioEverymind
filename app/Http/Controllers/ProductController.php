@@ -61,4 +61,10 @@ class ProductController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function delete($id)
+    {
+        $product = $this->service->delete($id);
+        return response()->json('Produto excluído com sucesso!');
+    }
 }

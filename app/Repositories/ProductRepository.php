@@ -37,7 +37,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function delete($id) 
     {
-        $this->product->delete($id);
+        $product = $this->find($id);
+        return $product->delete($id);
     }
 
     public function find($id) 

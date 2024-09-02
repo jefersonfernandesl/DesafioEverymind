@@ -36,7 +36,10 @@ function atualizarProdutos() {
             $('#tbody').html(productsHtml);
         },
         error: function (xhr, status, error) {
-            console.error('Erro ao buscar os produtos: ' + error);
+            iziToast.error({
+                title: 'Falha!',
+                message: 'Não foi possível buscar os produtos',
+            });
         }
     });
 }
@@ -100,13 +103,13 @@ function editarModal(id) {
                 let preco = $('#precoEdit').val();
                 preco = preco.replace(/[R$.]/g, '').replace(',', '.');
                 $('#precoEdit').val(preco);
-                
+
                 let _method = $('#_method').val()
                 let id = $('#editForm').data('id');
                 let nome = $('#nomeEdit').val();
                 let codigo = $('#codigoEdit').val();
                 let descricao = $('#descricaoEdit').val();
-                            
+
                 $.ajax({
                     type: 'POST',
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content') },
@@ -121,6 +124,10 @@ function editarModal(id) {
                     },
                     dataType: "json",
                     success: function (response) {
+                        iziToast.success({
+                            title: 'Sucesso!',
+                            message: 'Produto atualizado.',
+                        });
                         atualizarProdutos();
                         $('#editaModal').modal('hide');
                         $('#editaModal').remove();
@@ -130,7 +137,10 @@ function editarModal(id) {
                             let erros = response.responseJSON.errors;
                             exibeErrosEdit(erros);
                         } else {
-                            console.log(response.responseJSON);
+                            iziToast.error({
+                                title: 'Falha!',
+                                message: response.responseJSON,
+                            });
                         }
                     }
                 });
@@ -170,14 +180,21 @@ function deletarModal(id) {
 function deletarProduto(id) {
     $.ajax({
         type: 'DELETE',
-        url: `/api/deletar-produto/${id}`,
+        url: `/apagar/${id}`,
         success: function (response) {
+            iziToast.success({
+                title: 'Sucesso!',
+                message: 'Produto apagado.',
+            });
             atualizarProdutos();
             $('#deletarModal').modal('hide');
             $('#deletarModal').remove();
         },
         error: function (response) {
-            console.log('Erro ao deletar o produto:', response);
+            iziToast.error({
+                title: 'Falha',
+                message: 'Não foi possível deletar o produto:' + response,
+            });
         }
     });
 }
