@@ -28,7 +28,7 @@ class ProductController extends Controller
             }
             return response()->json('Produto cadastrado com sucesso!', 201);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return response()->json($e->getMessage(), 500)
         }
     }
 
@@ -41,7 +41,7 @@ class ProductController extends Controller
             }
             return response()->json('Produto atualizado com sucesso!', 201);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return response()->json($e->getMessage(), 500)
         }
     }
 
